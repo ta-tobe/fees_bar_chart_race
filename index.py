@@ -23,17 +23,39 @@ server = app.server
 
 title = html.Div(
     [
-        html.H1("Crypto Charts",
+        html.H1("Crypto Fees: A Brief History",
                 style={'text-align': 'center'}),
-        html.H4("compare blockchains and applications at a glance",
-                style={'text-align': 'center', 'color': 'grey'})
     ], className='card-title'
 )
 
+# first_card = dbc.Card(
+#     dcc.Graph(figure=fig,
+#               # id="splom"
+#               )
+# )
+
+# cards = dbc.Row(
+#     [
+#         dbc.Row(
+#             [dbc.Col(first_card)],
+#             style={'margin-top': 25, 'margin-bottom': 10,
+#                    # 'margin-right': '25px', 'margin-left': '25px',
+#                    }
+#         ),
+#     ]
+# )
+
+attribution = dbc.Row(
+    [dbc.Row([
+        dbc.CardLink("Created by: @tc_madt", href="https://www.twitter.com/tc_madt")],
+    ),
+        dbc.Row([dbc.CardLink("Data Source: Crypto Fees", href="https://www.cryptofees.info")]),
+    ]
+)
+
 app.layout = html.Div([title,
-#                        navbar,
 #                        cards,
-#                        attribution
+                       attribution
                       ]
                       ,
                       style={'margin-top': 10, 'margin-bottom': 10,
