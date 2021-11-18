@@ -28,22 +28,27 @@ title = html.Div(
     ], className='card-title'
 )
 
-# first_card = dbc.Card(
-#     dcc.Graph(figure=fig,
-#               # id="splom"
-#               )
-# )
+df = px.data.gapminder()
 
-# cards = dbc.Row(
-#     [
-#         dbc.Row(
-#             [dbc.Col(first_card)],
-#             style={'margin-top': 25, 'margin-bottom': 10,
-#                    # 'margin-right': '25px', 'margin-left': '25px',
-#                    }
-#         ),
-#     ]
-# )
+fig = px.bar(df, x="continent", y="pop", color="continent",
+  animation_frame="year", animation_group="country", range_y=[0,4000000000])
+
+first_card = dbc.Card(
+    dcc.Graph(figure=fig,
+              # id="splom"
+              )
+)
+
+cards = dbc.Row(
+    [
+        dbc.Row(
+            [dbc.Col(first_card)],
+            style={'margin-top': 25, 'margin-bottom': 10,
+                   # 'margin-right': '25px', 'margin-left': '25px',
+                   }
+        ),
+    ]
+)
 
 attribution = dbc.Row(
     [dbc.Row([
@@ -54,7 +59,7 @@ attribution = dbc.Row(
 )
 
 app.layout = html.Div([title,
-#                        cards,
+                       cards,
                        attribution
                       ]
                       ,
