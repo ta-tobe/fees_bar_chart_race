@@ -1,0 +1,10 @@
+Flask==1.1.1
+dash
+dash-html-components
+dash-core-components
+dash-bootstrap-components
+dash-renderer
+gunicorn===19.9.0
+pandas
+requests
+plotly
