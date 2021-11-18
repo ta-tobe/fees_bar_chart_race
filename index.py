@@ -9,8 +9,6 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
 import numpy as np
-
-
 import requests
 
 
@@ -22,12 +20,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 server = app.server
 
-title = html.Div(
-    [
-        html.H1("Crypto Fees: A Brief History",
-                style={'text-align': 'center'}),
-    ], className='card-title'
-)
+
 
 def cryptofees():
     fees_requests = requests.get("https://cryptofees.info/api/v1/fees")
@@ -82,9 +75,10 @@ column_dict = {
     'name': '',
     'fee': 'Fees',
 }
-df = cryptofees()
-bar1_data = df.groupby('id').sum().reset_index().nlargest(10, 'fee').sort_values(by='fee', ascending=False)
-df = df[df.id.isin(bar1_data.id)]
+
+df_orig = cryptofees()
+bar1_data = df_orig.groupby('id').sum().reset_index().nlargest(10, 'fee').sort_values(by='fee', ascending=False)
+df = df_orig[df_orig.id.isin(bar1_data.id)]
 
 fig = px.bar(df,
              y="id",
@@ -98,6 +92,13 @@ fig = px.bar(df,
              category_orders={"id": np.flip(df[['id', 'fee']].sort_values(by=['fee'], ascending=True)['id'].unique()),
                               "date": df.date.sort_values(ascending=True)}
              )
+
+title = html.Div(
+    [
+        html.H1("Crypto Fees: A Brief History",
+                style={'text-align': 'center'}),
+    ], className='card-title'
+)
 
 first_card = dbc.Card(
     dcc.Graph(figure=fig,
