@@ -7,7 +7,8 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 # from dash_bootstrap_components._components.Container import Container
 import pandas as pd
-import plotly.express as px 
+import plotly.express as px
+import numpy as np
 
 
 import requests
